@@ -22,9 +22,9 @@ class UnionFind:
                 a, b = b, a
                 
             self.parent[b] = a
+            if self.rank[a] == self.rank[b]:
+                self.rank[b] += 1
             self.num -=1
-            # if self.rank[a] == self.rank[b]:
-            self.rank[b] += 1
 
 class Solution:
      def findCircleNum(self, isconnected: List[List[int]]) -> int:
@@ -34,8 +34,6 @@ class Solution:
             for j in range(len(isconnected[0])):
                 if i != j and isconnected[i][j]==1:
                     obj.union(i,j)
-    
-    
       
         return obj.num
                 
