@@ -1,17 +1,14 @@
 class Solution:
     def canJump(self, nums: List[int]) -> bool:
-
         n = len(nums)
-        dp = [False for _ in range(n)]
-        dp[-1] = True
-        lt = n-1
+        lt = n - 1
         for i in range(n-2,-1,-1):
-            if nums[i] >= lt -i:
-                dp[i] = True
+            if nums[i] >= lt - i:
                 lt = i
-        return dp[0]
+        return lt == 0
 
 
+    
 #         if len(nums) == 1:
 #             return True
 #         memo = {}
@@ -32,10 +29,4 @@ class Solution:
 
     
         
-        # [T,T,T,T,T]
-        # [F,F,F,F,T]
-        #  0 1 2 3 4
-        # [        T]
-        # 4-1 = 3
-        # if nums[idx] >= last trueindx - idx:
-        #     True
+       
