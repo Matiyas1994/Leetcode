@@ -5,12 +5,14 @@ class Solution:
 #         for num in nums:
 #             s = s ^ num
 #         return n - s
-        nums.sort()
-        numsLength = len(nums)
-        if nums[-1] != numsLength:
-            return numsLength
-        for idx, val in enumerate(nums):
-            if idx != val:
-                return idx
-        
-        
+        # nums.sort()
+        # numsLength = len(nums)
+        # if nums[-1] != numsLength:
+        #     return numsLength
+        # for idx, val in enumerate(nums):
+        #     if idx != val:
+        #         return idx
+        n = len(nums)
+        sumOneUpToN = n * (n + 1)//2
+        sumOfTheArray = sum(nums)
+        return sumOneUpToN - sumOfTheArray
