@@ -27,8 +27,9 @@ class Solution:
             else:
                 piv = mid
                 R = mid - 1
-      
-        return max(bs(0,piv,target),bs(piv,len(nums)-1,target))
+        if nums[piv] <= target <=nums[-1]:
+            return bs(piv,len(nums)-1,target)
+        return bs(0,piv,target)
     
             
                 
