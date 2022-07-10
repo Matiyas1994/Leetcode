@@ -7,29 +7,15 @@ class Solution:
             "L":50,
             "C":100,
             "D":500,
-            "M":1000,
-            "IV":4,
-            "IX":9,
-            "XL":40,
-            "XC":90,
-            "CD":400,
-            "CM":900
+            "M":1000
             }
-        if s in dic:
-            return dic[s]
         ans = 0
-        jump = False
-        for i,ch in enumerate(s):
-            if jump:
-                jump = False
-                continue
-            if i != len(s)-1:
-                if s[i:i+2] in dic:
-                    ans +=dic[s[i:i+2]]
-                    jump = True
-                    continue
-                
-            ans +=dic[ch]
-                    
+        
+        for i in range(1,len(s)):
+            if dic[s[i-1]] < dic[s[i]]:
+                ans -=dic[s[i-1]]
+            else:
+                ans +=dic[s[i-1]]
+        ans += dic[s[-1]]
         return ans
         
