@@ -3,26 +3,27 @@ class Solution:
         """
         Do not return anything, modify matrix in-place instead.
         """
+        """
+        Time-> O(2*N*M)
+        Space-> O(1) 
+        """
         m, n = len(matrix), len(matrix[0])
-        def make_row_zero(r):
-            for i in range(0,n):
-                if matrix[r][i] !=0:
-                    matrix[r][i] = "c"
-        def make_col_zero(c):
-            for j in range(0,m):
-                if matrix[j][c] !=0:
-                    matrix[j][c] = "c"
+        colf = 1
+        
+        for i in range(m):
+            if matrix[i][0] == 0:
+                colf = 0
+            for j in range(1,n):
+                if matrix[i][j] == 0:
+                    matrix[i][0] = 0
+                    matrix[0][j] = 0
             
-    
-        for i in range(m):
-            for j in range(n):
-                if matrix[i][j]==0:
-                    make_row_zero(i)
-                    make_col_zero(j)
-                    
-        for i in range(m):
-            for j in range(n):
-                if matrix[i][j]=="c":
+            
+        for i in range(m-1,-1,-1):
+            for j in range(n-1,0,-1):
+                if matrix[i][0] == 0 or matrix[0][j]==0:
                     matrix[i][j] = 0
-                
+            if colf == 0:
+                matrix[i][0] = 0
+        
        
