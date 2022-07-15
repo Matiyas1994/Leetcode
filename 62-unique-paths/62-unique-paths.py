@@ -1,28 +1,35 @@
 class Solution:
     def uniquePaths(self, m: int, n: int) -> int:
-#         memo = {}
-#         legitMove = lambda row , col : 0 <=row < m and 0<= col < n 
-#         def pathCounter(r=0, c=0):
-#             nonlocal m,n
-#             if r == m-1 and c == n-1:
-#                 return 1
-#             if (r,c) not in memo:
-#                 r1, r2 = 0, 0
-#                 if legitMove(r+1,c):
-#                     r1 =  pathCounter(r+1,c)
-#                 if legitMove(r,c+1):
-#                     r2 = pathCounter(r,c+1)
-#                 memo[(r,c)] = r1 + r2 
-            
-#             return memo[(r,c)]
+        reqSteps = m+n-2
+        r = m-1
+        numerator = 1
+        denominator = 1
+        return comb(reqSteps,r) 
+        """
+        comination  c(reqSteps, r) , my combination implimentation
+        """
+#         for i in range(1,r+1):
+#             numerator *= (reqSteps - r + i)
+#             denominator *= i
         
-#         return pathCounter()
-
-        dp = [[ 1 if i==0 or j==0 else 0  for i in range(n)] for j in range(m)]
+#         return numerator//denominator
         
-        for r in range(1,m):
-            for c in range(1,n):
-                dp[r][c] = dp[r-1][c] + dp[r][c-1]
         
-        return dp[m-1][n-1]
+        
+        
+        
+#         dp=[[0 for _ in range(n)] for _ in range(m)]
+#         for i in range(m):
+#             dp[i][0] = 1
+#         for j in range(n):
+#             dp[0][j] = 1
+        
+#         for i in range(1,m):
+#             for j in range(1,n):
+#                 dp[i][j] = dp[i-1][j] + dp[i][j-1]
+        
+#         return dp[m-1][n-1]
+        
+        
+        
         
