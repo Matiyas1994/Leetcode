@@ -12,31 +12,20 @@ class Solution:
                 start.next = prev
                 prev = start
                 start = temp
-            return prev
-                
-            
+            return prev    
        
-        dummy = fast = slow = ListNode()
-        dummy.next = head
+        fast = slow = head
         while fast and fast.next:
             fast = fast.next.next
             slow = slow.next
           
+        if fast:
+            slow = slow.next
         
-        new_start = None
-        if fast==None:
-            dummy = ListNode(slow.val, slow.next)
-            slow.next = None
-            new_start = reverse(dummy)
-            
-        else:
-            new_start = reverse(slow.next)
-            slow.next = None
-        
-        
-        while new_start and head:
-            if new_start.val != head.val: return False
-            new_start = new_start.next
+        slow = reverse(slow)
+        while slow:
+            if slow.val != head.val: return False
+            slow = slow.next
             head = head.next
         
         return True
