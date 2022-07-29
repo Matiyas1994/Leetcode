@@ -4,11 +4,11 @@ class Solution:
     #   """  BIt Manipulation with XOR """
     #  eg [3,0,4,1] = 4 ^ 0 ^ 3 ^ 1 ^ 0 ^ 2 ^ 4 ^ 3 ^ 1 = 2     
     
-        res = len(nums) 
+        res = 0
         for idx,num in enumerate(nums):
-            res ^= num
-            res ^= idx
-        return res
+            res ^= num ^ (idx+1)
+            
+        return res 
 
 
     #   """ Using sort """
@@ -19,6 +19,7 @@ class Solution:
         # for idx, val in enumerate(nums):
         #     if idx != val:
         #         return idx
+        
         
         """Using Maths"""
         # n = len(nums)
