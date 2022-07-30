@@ -1,22 +1,43 @@
 class Solution:
     def solveNQueens(self, n: int) -> List[List[str]]:
-        #check whether a queen can be placed in row i, column j
-        def valid(i,j):
-            for row in range(i):
-                if board[row] == j or abs(row-i)==abs(board[row]-j):
-                    return False
-            return True
+        ans = []
+        colset = set()
+        leftdiagonal = set()
+        rightdiagonal = set()  
+        board = [['.' for _ in range(n)]for _ in range(n)]
+      
+        def valid(r,c):
+            return ( 
+                    c not in colset
+                    and r+c not in rightdiagonal
+                    and c-r not in leftdiagonal
+                    )
         
-        def dfs(i,current_values):
-            if i == n:
-                res.append(current_values)
-                return
-            for j in range(n):
-                if valid(i,j):
-                    board[i] = j
-                    dfs(i+1,current_values+[ "."*j+"Q"+"."*(n-j-1) ])
+        def backtrack(rs, board):
+            nonlocal n
+            if rs == n:
+                temp = []
+                for row in board:
+                    temp.append("".join(row))
+                ans.append(temp)
             
-        board = [-1]*n # the j index of the queen placement at each row.
-        res = []
-        dfs(0,[])
-        return res
+            else:
+                for c in range(n):
+                        if valid(rs,c):
+                            board[rs][c] = 'Q'
+                            colset.add(c)
+                            rightdiagonal.add(rs+c)
+                            leftdiagonal.add(c-rs)
+                            
+                            backtrack(rs+1, board)
+                            
+                            board[rs][c] = '.'
+                            colset.remove(c)
+                            rightdiagonal.remove(rs+c)
+                            leftdiagonal.remove(c-rs)
+                            
+        backtrack(0, board)
+        return ans
+        
+                            
+                            
