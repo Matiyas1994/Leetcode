@@ -1,12 +1,13 @@
 class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
-        elementIndex = {val:i for i,val in enumerate(nums)}
+        elementWithIdx = {}
         
-        for i in range(len(nums)):
-            if target - nums[i] in elementIndex:
-                if i != elementIndex[target - nums[i]]:
-                    return[i,elementIndex[target - nums[i]]]
-        
+        for idx, number in enumerate(nums):
+            if (target - number) in elementWithIdx:
+                return[idx, elementWithIdx[target - number]]
+            
+            elementWithIdx[number] = idx    
+            
             
             
         
