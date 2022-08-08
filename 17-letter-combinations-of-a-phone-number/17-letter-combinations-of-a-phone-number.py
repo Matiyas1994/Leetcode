@@ -14,44 +14,51 @@ class Solution:
             "9" : ["w","x","y","z"]
         }
         
+        ans = []
+        def backtrack(i, ds):
+            nonlocal digits
+            if i == len(digits):
+                ans.append("".join(ds[:]))
+                
+            else:
+                for ch in reference[digits[i]]:
+                    ds.append(ch)
+                    backtrack(i+1, ds)
+                    ds.pop()
+        backtrack(0, [])
+        return ans 
+            
+            
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
 
-        
-        def rec(i):
-            if i == len(digits)-1:
-                return reference[digits[i]]
-            a2 = []
-            for ch in reference[digits[i]]:
-                temp = rec(i+1)
-                for k,t in enumerate(temp):
-                    a2.append(ch + t)
-                    
-            return a2[:]
-            
-        
-        return rec(0)
-            
-        
-    #         def dfs(start,i,temp):
-#             temp.append(start)
+#         def rec(i):
 #             if i == len(digits)-1:
-#                 ans.append("".join(temp[:]))
-#                 return 
-           
-#             for ch in adjlist[start]:
-#                 dfs(ch,i+1,temp[:])
+#                 return reference[digits[i]]
+#             a2 = []
+#             for ch in reference[digits[i]]:
+#                 temp = rec(i+1)
+#                 for t in temp:
+#                     a2.append(ch + t)
+                    
+#             return a2[:]
+                 
+#         return rec(0)
+      
         
-        
-#         for start in reference[digits[0]]:
-#             dfs(start,0,[])
-        
-#         adjlist = defaultdict(list)
-#         for i in range(len(digits)-1):
-#             for char in reference[digits[i]]:
-#                 # if char not in adjlist:
-#                 adjlist[char] = reference[digits[i+1]]
-#                 # else:
-#                      # adjlist[char] += reference[digits[i+1]]
-#         print(adjlist)
-#         ans = []
-        
-        
+   
