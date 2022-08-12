@@ -1,47 +1,26 @@
 class MyStack:
 
     def __init__(self):
-        self.q1 = deque()
-        self.q2 = deque()
-        self.isq1 = True
+        self.que = deque()
+        
         
 
     def push(self, x: int) -> None:
-        if self.isq1:
-            while self.q1:
-                self.q2.append(self.q1.popleft())
-            self.q1.append(x)
-            self.isq1 = False
-        else:
-            while self.q2:
-                self.q1.append(self.q2.popleft())
-            self.q2.append(x)
-            self.isq1 = True
-            
+        self.que.append(x)
+        for _ in range(len(self.que)-1):
+            self.que.append(self.que.popleft())
+        
 
     def pop(self) -> int:
-        if not self.isq1:
-            x = self.q1.popleft()
-            if self.q2:
-                self.q1.append(self.q2.popleft())
-        else:
-            x = self.q2.popleft()
-            if self.q1:
-                self.q2.append(self.q1.popleft())
-
-        return x
+        return self.que.popleft()
+    
     
 
     def top(self) -> int:
-        # print(self.q1, self.q2, self.isq1)
-        if not self.isq1:
-            return self.q1[0]
-        else:
-            return self.q2[0]
-        
+        return self.que[0]
 
     def empty(self) -> bool:
-        return not self.q1 and not self.q2
+        return not self.que
         
 
 
