@@ -17,16 +17,17 @@ class Solution:
 #         return f(0,True)
    
 
-        dp = [[0 for j in range(len(prices)+1)] for i in range(2)]
+        # dp = [[0 for j in range(len(prices)+1)] for i in range(2)]
+        ast, asf = 0, 0
     
         for i in range(len(prices)-1,-1,-1):
             for canIbuy in [0, 1]:
                 if canIbuy:
-                    dp[canIbuy][i] = max(-prices[i]+dp[0][i+1], dp[1][i+1])
+                    ast = max(-prices[i]+asf, ast)
                 else:
-                    dp[canIbuy][i] = max(prices[i]+dp[1][i+1], dp[0][i+1])
+                    asf = max(prices[i]+ast, asf)
                 
-        return dp[1][0]
+        return ast
         
             
             
