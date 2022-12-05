@@ -4,24 +4,24 @@ from typing import List
 class Solution:
     #Function to detect cycle in an undirected graph.
 	def isCycle(self, V: int, adj: List[List[int]]) -> bool:
-		#Code here
 		visited = set()
-		def cycledetect(node, previousNode, visited):
-		  
+		def dfs(node,prev):
 		    visited.add(node)
-		    
-		    for neigbour in adj[node]:
-		        if neigbour in visited and neigbour==previousNode: continue
-		        if neigbour in visited: return True
-		        else:
-		            if cycledetect(neigbour, node, visited): return True
-		            
+		    for next_node in adj[node]:
+		        if next_node in visited and next_node != prev:
+		            return True
+		        elif next_node not in visited:
+		            if dfs(next_node, node):
+		                return True
+		
+		
 		for node in range(V):
 		    if node not in visited:
-    		    if cycledetect(node,-1, visited):
-    		        return True
+		        if dfs(node, -1):
+		            return True
+		 
 		return False
-		            
+		      
 
 
 #{ 
