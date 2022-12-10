@@ -1,25 +1,21 @@
 class Solution:
     def allPathsSourceTarget(self, graph: List[List[int]]) -> List[List[int]]:
         n = len(graph)
-        visited = [0]*n
-        ans = []
+        answer = []
         
         def dfs(node, path):
-            if not visited[node]:
-                visited[node] = 1
-                path.append(node)
+            path.append(node)
+            
+            if node==len(graph)-1:
+                answer.append(path[:])
+
+
+            for next_node in graph[node]:
+                dfs(next_node,path)
                 
-                if node==len(graph)-1:
-                    ans.append(path[::])
-                    
-                
-                for next_node in graph[node]:
-                    dfs(next_node,path)
-                
-                visited[node] = 0
-                path.pop()
-        
+            path.pop()
+
         dfs(0,[])
-        return ans
+        return answer
         
         
