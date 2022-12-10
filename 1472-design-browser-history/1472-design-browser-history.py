@@ -9,14 +9,17 @@ class BrowserHistory:
     def __init__(self, homepage: str):
         self.browseHistory = [homepage]
         self.current_pos = 0
-
-    def visit(self, url: str) -> None:
+        self.bound = 0
         
-        while self.browseHistory and len(self.browseHistory) > self.current_pos+1:
-            self.browseHistory.pop()
-        if url != self.browseHistory[-1]:    
+    def visit(self, url: str) -> None:
+        self.current_pos += 1
+        
+        if self.current_pos == len(self.browseHistory):
             self.browseHistory.append(url)
-        self.current_pos = len(self.browseHistory) - 1
+        else:
+            self.browseHistory[self.current_pos] = url
+        
+        self.bound = self.current_pos
         
 
     def back(self, steps: int) -> str:
@@ -26,7 +29,7 @@ class BrowserHistory:
         
 
     def forward(self, steps: int) -> str:
-        self.current_pos = min(len(self.browseHistory)-1, self.current_pos + steps)
+        self.current_pos = min(self.bound, self.current_pos + steps)
         
         return self.browseHistory[self.current_pos]
         
@@ -38,5 +41,3 @@ class BrowserHistory:
 # param_2 = obj.back(steps)
 # param_3 = obj.forward(steps)
 
-# leetcode->google->facebook->linkdn
-                     # l
